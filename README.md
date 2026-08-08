@@ -224,6 +224,11 @@ that do not transfer: those thresholds span 0.31 to 0.999, and 3DResNeXt101 has 
 AUC than 3DResNet101 (0.8028 vs. 0.7819) but 16 points *lower* accuracy (56.58 % vs.
 72.21 %) because its threshold sits at 0.999.
 
+The same instability shows up within a single model. Across the three LG-CAFN seeds the
+selected threshold is 0.878, 0.557 and 0.615 — a spread of 0.32 with nothing changed but
+the random seed. Sensitivity moves from 0.751 to 0.792 and specificity from 0.842 to 0.737
+as a result, while AUC barely moves.
+
 Since checkpoint selection, threshold selection and early stopping are all keyed to that
 validation set, a reported test figure is in part a draw over which run was made. This is a
 property of the benchmark protocol, not of any model in it.
@@ -334,6 +339,13 @@ rather than read from the artifacts.
   one from the default configuration and Exp-2 one from a later re-run; the de facto rule
   was "use the newer batch unless it is much worse", which was never written down. Training
   histories exist only for the later runs.
+- **The mIoU convention may not match the original's.** At comparable DSC, the original
+  paper's mIoU–DSC gap is 3.4–8.4 points while ours is 8.5–10.2. Here mIoU is the per-image
+  mean of (foreground IoU + background IoU) / 2, and background IoU is 99.83–99.89 % because
+  lesions occupy well under 1 % of each slice — so the gap is arithmetic, not a defect. But
+  the original's metric implementation is not in the release, so we cannot establish that
+  both compute mIoU the same way. Foreground-only IoU is reported alongside it for this
+  reason.
 - **Training code is being prepared** and will be added here. The verification and
   evaluation scripts, which the paper's claims depend on, are complete.
 
@@ -361,3 +373,5 @@ Shi Yu — `syu25@cougarnet.uh.edu`
 
 This work was carried out under the supervision of Prof. Lei Li (Rice University).
 Experiments were run on a shared GPU server.
+
+
