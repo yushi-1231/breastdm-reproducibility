@@ -1,0 +1,4 @@
+seed,val_auc,test_auc,val_test_gap,youden_threshold,sensitivity,specificity,accuracy,TP,TN,FP,FN,n_test,checkpoint
+42,0.9888,0.8477,0.1411,0.8783,0.7509,0.8421,0.7767,217,96,18,72,403,models/fusionM96_true96_retrain/fusionM96_true96/fusionM96_img9Se_best_auc0.9888.pth
+123,0.9897,0.8445,0.1452,0.557,0.7924,0.7368,0.7767,229,84,30,60,403,models/fusionM96_true96_s123/fusionM96_true96_s123/fusionM96_img9Se_best_auc0.9901.pth
+456,0.9848,0.8647,0.1201,0.6147,0.7785,0.8246,0.7916,225,94,20,64,403,models/fusionM96_true96_s456/fusionM96_true96_s456/fusionM96_img9Se_best_auc0.9843.pth
